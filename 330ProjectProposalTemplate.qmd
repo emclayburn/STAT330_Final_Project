@@ -26,17 +26,22 @@ The group members are Jose De Leon and Ethan Clayburn
 
 # 2 Data Set
 
-DELETE THIS: What dataset do you intend to use for your final project? Where can it be found? **Provide a description of the data set and the variables it contains.** Load your data into R and print the first few rows of the data set.
+We plan on using a baseball dataset that includes wins above average by position for each MLB team this past season. This shows each position in the field, the total for the fielders, all different kinds of pitchers, and the collective pitchers.  
 
 ```{r}
-baseball <- read_delim("Data", delim = ",")
-head(baseball)
+baseball <- read_csv("Teams.csv")
+baseball |>
+  select(yearID, teamID, Rank, W, L, DivWin, WCWin, LgWin, WSWin, H, R, RA, ERA, E, attendance) |>
+  filter(yearID >= 1998)
+
 ```
 
 
 # 3 Potential Questions of Interest
 
 DELETE THIS: What are two scientific questions you could try to answer by applying regression tools to this dataset? **Provide commentary on why someone might be interested in studying these questions.**
+
+Which position effects the wins above replacement the most? 
 
 # 4 Exploratory Data Analysis
 
