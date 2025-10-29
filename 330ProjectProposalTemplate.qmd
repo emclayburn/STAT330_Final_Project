@@ -17,6 +17,7 @@ h1.title {
 
 ```{r setup, include=FALSE}
 library(tidyverse)
+library(readxl)
 ```
 
 # 1 Group Members
@@ -28,13 +29,8 @@ The group members are Jose De Leon and Ethan Clayburn
 DELETE THIS: What dataset do you intend to use for your final project? Where can it be found? **Provide a description of the data set and the variables it contains.** Load your data into R and print the first few rows of the data set.
 
 ```{r}
-#Read your data into R. 
-#You will eventually need to provide a copy of the data to the
-#professor as part of the final project submission, so it
-#probably makes sense to download a copy of the data to your
-#machine rather than call the data from a url.
-
-#proj_data = read.table("PATH_TO_DATA")
+baseball <- read_delim("Data", delim = ",")
+head(baseball)
 ```
 
 
