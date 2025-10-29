@@ -26,13 +26,17 @@ The group members are Jose De Leon and Ethan Clayburn
 
 # 2 Data Set
 
-We plan on using a baseball dataset that includes wins above average by position for each MLB team this past season. This shows each position in the field, the total for the fielders, all different kinds of pitchers, and the collective pitchers.  
+We plan on using a baseball dataset that shows MLB team performance since 1998, when the last expansion teams were added. 
 
 ```{r}
 baseball <- read_csv("Teams.csv")
 baseball |>
-  select(yearID, teamID, Rank, W, L, DivWin, WCWin, LgWin, WSWin, H, R, RA, ERA, E, attendance) |>
-  filter(yearID >= 1998)
+  select(yearID, teamID, Rank, W, DivWin, WCWin, LgWin, WSWin, H, R, RA, ERA, E, BPF, attendance, L) |>
+  filter(yearID >= 1998) |>
+  mutate(
+    WinPct = W / (W + L)
+  ) |>
+  select(yearID:W, WinPct, everything(), -L)
 
 ```
 
@@ -41,7 +45,7 @@ baseball |>
 
 DELETE THIS: What are two scientific questions you could try to answer by applying regression tools to this dataset? **Provide commentary on why someone might be interested in studying these questions.**
 
-Which position effects the wins above replacement the most? 
+
 
 # 4 Exploratory Data Analysis
 
