@@ -1,5 +1,5 @@
 ---
-title: "Stat 330 Project Proposal"
+title: "Stat 330 Final Project Proposal"
 authors: Jose De Leon and Ethan Clayburn
 format: 
   pdf:
