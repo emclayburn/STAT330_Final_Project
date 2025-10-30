@@ -98,12 +98,7 @@ DELETE THIS: Assess whether the regression assumptions are satisfied **and provi
 
 ```{r}
 #E
-<<<<<<< HEAD
 
-resids <- lm.fit$residuals
-yhat <- lm.fit$fitted.values
-=======
->>>>>>> bb015f5bc76a615868071b92dc412994b7a8e4d7
 model_data <- fortify(lm.fit)
 ggplot(model_data, aes(x = .fitted, y = .resid)) +
   geom_point() +
