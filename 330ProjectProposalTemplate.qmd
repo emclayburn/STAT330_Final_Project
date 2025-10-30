@@ -97,7 +97,12 @@ lm.fit = lm(WinPct~RA+ERA+E, data = baseball_simplified)
 DELETE THIS: Assess whether the regression assumptions are satisfied **and provide interpretation for the estimated model coefficients and associated uncertainty estimates.** You are welcome to use as many or as few code blocks as you wish in this section, but make sure that your analysis is easy to follow.
 
 ```{r}
+<<<<<<< HEAD
 #E
+=======
+resids <- lm.fit$residuals
+yhat <- lm.fit$fitted.values
+>>>>>>> 3f87427368168faa0ba7d8139ed9054b0049603a
 model_data <- fortify(lm.fit)
 ggplot(model_data, aes(x = .fitted, y = .resid)) +
   geom_point() +
@@ -123,6 +128,15 @@ plot(lm.fit, which = 2)
 
 ```{r}
 #influential points
+plot(lm.fit, which = 5)
+
+```
+```{r}
+plot(lm.fit, which = 2)
+
+```
+
+```{r}
 plot(lm.fit, which = 5)
 
 ```
