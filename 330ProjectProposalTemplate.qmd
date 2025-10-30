@@ -60,13 +60,13 @@ ggplot(data = baseball, aes(x=H + R, y=WinPct, color = teamID)) +
   geom_point()
 
 ```
-It's interesting to see that the more hits and runs you have, the higher your win percentage. The coorelation is very strong when ploting the points. 
+It's interesting to see that the more hits and runs you have, the higher your win percentage. The correlation is very strong when ploting the points. 
 
 ```{r}
 ggplot(baseball, aes(x=R - RA, y=WinPct, color = teamID)) +
   geom_point()
 ```
-The run differential has a very strong coorelation. The more hits you have compared to your opponents, the higher your win percentage is.
+The run differential has a very strong correlation. The more hits you have compared to your opponents, the higher your win percentage is.
 
 ```{r}
 
@@ -80,7 +80,7 @@ ggplot(data = baseball, aes(x = attendance, y = WinPct, color = BPF)) +
   )
 
 ```
-This graph is 
+This graph is an interesting one to looks it. There is a positive correlation between total attendence and winning percentage, but the ball park doesn't really factor in too much.
 
 # 5 Preliminary Model Fit
 
@@ -97,6 +97,7 @@ lm.fit = lm(WinPct~RA+ERA+E, data = baseball_simplified)
 DELETE THIS: Assess whether the regression assumptions are satisfied **and provide interpretation for the estimated model coefficients and associated uncertainty estimates.** You are welcome to use as many or as few code blocks as you wish in this section, but make sure that your analysis is easy to follow.
 
 ```{r}
+#E
 model_data <- fortify(lm.fit)
 ggplot(model_data, aes(x = .fitted, y = .resid)) +
   geom_point() +
@@ -106,8 +107,22 @@ ggplot(model_data, aes(x = .fitted, y = .resid)) +
     x = "Fitted Values",
     y = "Residuals"
   )
-
+#L
 avPlots(lm.fit)
 summary(lm.fit)
+
+#Multicollinearity
+vif(lm.fit)
+
+```
+```{r}
+#N
+plot(lm.fit, which = 2)
+
+```
+
+```{r}
+#influential points
+plot(lm.fit, which = 5)
 
 ```
