@@ -86,7 +86,7 @@ This graph is an interesting one to looks it. There is a positive correlation be
 
 Our dependent variable is the teams win percentage and out explanatory variable is the hits a team has.
 
-$WinPct_i$ = $\beta\_0$ + $\beta\_1$ \* $RA_i$ + $\beta\_2$ \* $ERA_i$ + $\beta\_3$ \* $E_i$ + $\epsilon$
+$WinPct_i$ = $\beta\_0$ + $\beta\_1$ \* $ERA_i$ + $\beta\_2$ \* $E_i$ + $\epsilon$
 
 Someone would be interested in this relationship because fielding and pitching is a big part of baseball. You would want to see if it is the fielders in general or the pitchers that affect the winning percentage the most.
 
@@ -95,6 +95,12 @@ lm.fit = lm(WinPct~ERA+E, data = baseball_simplified)
 ```
 
 DELETE THIS: Assess whether the regression assumptions are satisfied **and provide interpretation for the estimated model coefficients and associated uncertainty estimates.** You are welcome to use as many or as few code blocks as you wish in this section, but make sure that your analysis is easy to follow.
+
+For Beta_0, when both ERA and Errors are zero, the WinPct is ---
+For Beta_1, holding all else constant, for every one increase in ERA, the WinPct goes (up/down) by an average of ---
+For Beta_2, holding all else constant, for every one increase in Errors, the WinPct goes (up/down) by an average of ---
+
+The p-values for the individual testing of the coeffecients based on H_0 = 0 are really significant with our F-statistic p-val being extremely less than 0.05
 
 ```{r}
 #E
@@ -111,17 +117,22 @@ ggplot(model_data, aes(x = .fitted, y = .resid)) +
 #L
 avPlots(lm.fit)
 summary(lm.fit)
+```
 
+```{r}
 #Multicollinearity
 
 vif(lm.fit)
-
+```
+Here we can see that the model coeffecient vifs are below 5 and are thus the model does not expereince extreme multicollinearity.
+```{r}
 #N
 plot(lm.fit, which = 2)
 
 ```
-
+Here we can see that the errors are very normally distributed and we can accept that assumption is met.
 ```{r}
 #influential points
 plot(lm.fit, which = 5)
 ```
+Here we can see that there are really no extreme influential points above the 0.5 threshold and won't have a drastic effect on our anlysis.
