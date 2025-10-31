@@ -53,8 +53,6 @@ Does the defense affect win percentage more than offense? There is a common phra
 
 # 4 Exploratory Data Analysis
 
-DELETE THIS: Conduct EDA and provide **at least 3** figures or statistics highlighting features or between variable relationships within the data that are relevant to the questions of interest you provided earlier in the proposal. **You should explain what you found interesting or noteworthy about each of 3 included elements.**
-
 ```{r}
 ggplot(data = baseball, aes(x=H + R, y=WinPct, color = teamID)) +
   geom_point()
@@ -94,14 +92,24 @@ Someone would be interested in this relationship because fielding and pitching i
 lm.fit = lm(WinPct~ERA+E, data = baseball_simplified)
 ```
 
-DELETE THIS: Assess whether the regression assumptions are satisfied **and provide interpretation for the estimated model coefficients and associated uncertainty estimates.** You are welcome to use as many or as few code blocks as you wish in this section, but make sure that your analysis is easy to follow.
+For Beta_0, when both ERA and Errors are zero, the WinPct is .9179
+For Beta_1, holding all else constant, for every one increase in ERA, the WinPct goes down by an average of .0874
+For Beta_2, holding all else constant, for every one increase in Errors, the WinPct goes down by an average of .0005
 
-For Beta_0, when both ERA and Errors are zero, the WinPct is ---
-For Beta_1, holding all else constant, for every one increase in ERA, the WinPct goes (up/down) by an average of ---
-For Beta_2, holding all else constant, for every one increase in Errors, the WinPct goes (up/down) by an average of ---
+The p-values for the individual testing of the coefficients based on H_0 = 0 are really significant with our F-statistic p-val being extremely less than 0.05
 
-The p-values for the individual testing of the coeffecients based on H_0 = 0 are really significant with our F-statistic p-val being extremely less than 0.05
+```{r}
+#L
+avPlots(lm.fit)
+summary(lm.fit)
+```
+Using the avPlot, we can see that the data is linear, meaning our first assumption is met. We know that independence is also met because the way that the data is gathers means the data is independent
+```{r}
+#N
+plot(lm.fit, which = 2)
 
+```
+Here we can see that the errors are very normally distributed and we can accept that assumption is met.
 ```{r}
 #E
 
@@ -114,25 +122,18 @@ ggplot(model_data, aes(x = .fitted, y = .resid)) +
     x = "Fitted Values",
     y = "Residuals"
   )
-#L
-avPlots(lm.fit)
-summary(lm.fit)
 ```
+When looking at the fitted vs residuals plot, the values are scattered and in a cloud, meaning that there is equal variance.
 
 ```{r}
 #Multicollinearity
 
 vif(lm.fit)
 ```
-Here we can see that the model coeffecient vifs are below 5 and are thus the model does not expereince extreme multicollinearity.
-```{r}
-#N
-plot(lm.fit, which = 2)
+Here we can see that the model coefficient vifs are below 5 and are thus the model does not experience extreme multicollinearity.
 
-```
-Here we can see that the errors are very normally distributed and we can accept that assumption is met.
 ```{r}
 #influential points
 plot(lm.fit, which = 5)
 ```
-Here we can see that there are really no extreme influential points above the 0.5 threshold and won't have a drastic effect on our anlysis.
+Here we can see that there are really no extreme influential points above the 0.5 threshold and won't have a drastic effect on our analysis.
